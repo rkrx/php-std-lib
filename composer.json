@@ -1,6 +1,7 @@
 {
 	"name": "rkrx/std-lib",
 	"type": "library",
+	"license": "MIT",
 	"require": {
 		"php": ">= 8.2",
 		"ext-iconv": "*",
