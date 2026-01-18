@@ -11,9 +11,10 @@ class CSVFile {
 	 * @param SplFileInfo|string $filepath
 	 * @param string $separator
 	 * @param bool $header
+	 * @param string $escape
 	 * @return Generator<array<string, string>>
 	 */
-	public static function getCSVLinesFromFile(SplFileInfo|string $filepath, string $separator = ',', string $enclosure = '"', bool $header = true): Generator {
+	public static function getCSVLinesFromFile(SplFileInfo|string $filepath, string $separator = ',', string $enclosure = '"', bool $header = true, string $escape = '\\'): Generator {
 		if($filepath instanceof SplFileInfo) {
 			$filepath = $filepath->getPathname();
 		}
@@ -25,7 +26,7 @@ class CSVFile {
 			$headerRow = null;
 			$headerRowColumnCount = null;
 			if($header) {
-				$headerRow = fgetcsv($fp, 0, $separator, $enclosure);
+				$headerRow = fgetcsv($fp, 0, $separator, $enclosure, $escape);
 				if($headerRow === false) {
 					throw new RuntimeException("Could not read header row from file: $filepath");
 				}
@@ -34,7 +35,7 @@ class CSVFile {
 				$headerRowColumnCount = count($headerRow);
 			}
 			while(!feof($fp)) {
-				$line = fgetcsv($fp, 0, $separator);
+				$line = fgetcsv($fp, 0, $separator, $enclosure, $escape);
 				if(!is_array($line)) {
 					break;
 				}
@@ -58,9 +59,11 @@ class CSVFile {
 	 * @param string $filepath
 	 * @param string $separator
 	 * @param bool $useHeader
+	 * @param string $enclosure
+	 * @param string $escape
 	 * @return void
 	 */
-	public static function writeCSVFile(iterable $lines, string $filepath, string $separator, bool $useHeader = true): void {
+	public static function writeCSVFile(iterable $lines, string $filepath, string $separator, bool $useHeader = true, string $enclosure = '"', string $escape = '\\'): void {
 		$fp = fopen($filepath, 'wb');
 		if($fp === false) {
 			throw new RuntimeException("Could not open file: $filepath");
@@ -71,13 +74,13 @@ class CSVFile {
 				foreach($lines as $line) {
 					if($header === null) {
 						$header = array_keys($line);
-						fputcsv($fp, $header, $separator);
+						fputcsv($fp, $header, $separator, $enclosure, $escape);
 					}
-					fputcsv($fp, $line, $separator);
+					fputcsv($fp, $line, $separator, $enclosure, $escape);
 				}
 			} else {
 				foreach($lines as $line) {
-					fputcsv($fp, $line, $separator);
+					fputcsv($fp, $line, $separator, $enclosure, $escape);
 				}
 			}
 		} finally {

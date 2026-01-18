@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use StdLib\FS\CSVFile;
 
 final class CSVFileTest extends TestCase {
+	/** @var list<string> */
 	private array $tempPaths = [];
 
 	protected function tearDown(): void {

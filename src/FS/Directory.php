@@ -82,9 +82,11 @@ class Directory {
 	 * @param string $input
 	 * @param string $separator
 	 * @param bool $header
+	 * @param string $enclosure
+	 * @param string $escape
 	 * @return Generator<array<string, string>>
 	 */
-	public static function getCSVLinesFromString(string $input, string $separator, bool $header = true) {
+	public static function getCSVLinesFromString(string $input, string $separator, bool $header = true, string $enclosure = '"', string $escape = '\\') {
 		$fp = fopen('php://memory', 'wb+');
 		if($fp === false) {
 			throw new RuntimeException('Could not open memory stream');
@@ -95,14 +97,14 @@ class Directory {
 		$headerRowColumnCount = null;
 		try {
 			if($header) {
-				$headerRow = fgetcsv($fp, 0, $separator);
+				$headerRow = fgetcsv($fp, 0, $separator, $enclosure, $escape);
 				if($headerRow === false) {
 					throw new RuntimeException('Could not read header row from string');
 				}
 				$headerRowColumnCount = count($headerRow);
 			}
 			while(!feof($fp)) {
-				$line = fgetcsv($fp, 0, $separator);
+				$line = fgetcsv($fp, 0, $separator, $enclosure, $escape);
 				if(!is_array($line)) {
 					break;
 				}

@@ -38,6 +38,8 @@ Parameters:
   Field enclosure character used in the CSV file.
 - `bool $header`  
   Whether the first row should be treated as the header.
+- `string $escape`  
+  Escape character used in the CSV file.
 
 Return Values:
 
@@ -100,6 +102,10 @@ Parameters:
   Field delimiter to write.
 - `bool $useHeader`  
   Whether to write the header row from the first line keys.
+- `string $enclosure`  
+  Field enclosure character to write.
+- `string $escape`  
+  Escape character to use when writing.
 
 Return Values:
 
@@ -275,6 +281,10 @@ Parameters:
   Field delimiter used in the CSV content.
 - `bool $header`  
   Whether the first row should be treated as the header.
+- `string $enclosure`  
+  Field enclosure character used in the CSV content.
+- `string $escape`  
+  Escape character used in the CSV content.
 
 Return Values:
 

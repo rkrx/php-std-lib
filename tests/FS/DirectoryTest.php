@@ -12,6 +12,7 @@ use RecursiveIteratorIterator;
 use FilesystemIterator;
 
 final class DirectoryTest extends TestCase {
+	/** @var list<string> */
 	private array $tempPaths = [];
 
 	protected function tearDown(): void {
@@ -143,6 +144,7 @@ final class DirectoryTest extends TestCase {
 			new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
 			RecursiveIteratorIterator::CHILD_FIRST
 		);
+		/** @var SplFileInfo $item */
 		foreach($items as $item) {
 			if($item->isDir()) {
 				@rmdir($item->getPathname());

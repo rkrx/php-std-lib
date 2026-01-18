@@ -17,6 +17,7 @@ final class JSONTest extends TestCase {
 		];
 
 		$json = JSON::encode($data);
+		/** @var object{a:int, b:string, c:object{nested:bool}} $decoded */
 		$decoded = JSON::decode($json);
 
 		$this->assertSame(1, $decoded->a);

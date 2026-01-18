@@ -9,6 +9,7 @@ use StdLib\FS\File;
 use RuntimeException;
 
 final class FileTest extends TestCase {
+	/** @var list<string> */
 	private array $tempPaths = [];
 
 	protected function tearDown(): void {
@@ -54,6 +55,9 @@ final class FileTest extends TestCase {
 		$this->assertSame('abc', file_get_contents($file));
 
 		$resource = fopen('php://memory', 'wb+');
+		if($resource === false) {
+			$this->fail('Could not open memory stream');
+		}
 		fwrite($resource, 'xyz');
 		rewind($resource);
 		File::setContents($file, $resource);
