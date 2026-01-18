@@ -1,0 +1,21 @@
+{
+	"name": "rkrx/std-lib",
+	"type": "library",
+	"require": {
+		"php": ">= 8.2",
+		"rkr/date-fns": "dev-main"
+	},
+	"autoload": {
+		"psr-4": {
+			"StdLib\\": "src/"
+		}
+	},
+	"require-dev": {
+		"phpstan/phpstan": "^1.10",
+		"phpunit/phpunit": "^11.5"
+	},
+	"scripts": {
+		"phpstan": "phpstan analyse",
+		"test": "phpunit"
+	}
+}
