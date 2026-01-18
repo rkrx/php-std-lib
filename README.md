@@ -1,5 +1,11 @@
 # The missing standard library for php (at least for me)
 
+## Installation
+
+```bash
+composer require rkr/std-lib
+```
+
 ## Table of Contents
 
 - [`StdLib\FS\CSVFile`](src/FS/README.md#csv-handling) — CSV file reader/writer generators with header mapping, BOM stripping, and configurable delimiters.
