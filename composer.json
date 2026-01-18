@@ -1,5 +1,5 @@
 {
-	"name": "rkrx/std-lib",
+	"name": "rkr/std-lib",
 	"type": "library",
 	"license": "MIT",
 	"require": {
