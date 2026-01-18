@@ -3,6 +3,10 @@
 	"type": "library",
 	"require": {
 		"php": ">= 8.2",
+		"ext-iconv": "*",
+		"ext-dom": "*",
+		"ext-mbstring": "*",
+		"ext-libxml": "*",
 		"rkr/date-fns": "dev-main"
 	},
 	"autoload": {
